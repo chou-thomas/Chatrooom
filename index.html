@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome to the Chatroom</title>
+	<style>	
+	#chatroom{
+		height: 600px;
+	}
+
+	</style>
+</head>
+<body>
+	<h2>Messages</h2>
+	<div id = "chatroom"></div>
+	<form id = "messages">
+		<input size = "50" id = "message"></input>
+		<input type = "submit"></input>
+	</form>
+
+	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+
+	<!-- jquery code -->
+	<script>
+	$( document ).ready(function(){
+		//connection to the socket
+		var socket = io.connect(); 
+
+		// creating chat variables from the html id's
+		var $sendMessage = $('#messages');
+		var $message = $('#message');
+		var $chatroom = $('#chatroom');
+
+		//
+		$sendMessage.submit(function(event){
+			// preventing the default behavior of pg ex: submit/ auto refresh
+			event.preventDefault();
+			socket.emit('sending_message', $message.val());
+			$message.val('');
+		});
+
+		socket.on('new message', function(data){
+			$chatroom.append(data + "<br/>");
+		});
+	});
+	</script>
+</body>
+</html>
