@@ -13,6 +13,13 @@
 		float: left;
 		border: 2px solid black;
 	}
+	.error{
+		color: red;
+	}
+	.private_msg{
+		color: orange;
+		font-style: italic;
+	}
 
 	</style>
 </head>
@@ -87,13 +94,19 @@
 		$sendMessage.submit(function(event){
 			// preventing the default behavior of pg ex: submit/ auto refresh
 			event.preventDefault();
-			socket.emit('sending_message', $message.val());
+			socket.emit('sending_message', $message.val(), function(data){
+			$chatroom.append('<span class = "error">' + data + '"</span><br/>');			
+		});
 			$message.val('');
 		});
 
 		socket.on('new_message', function(data){
 			$chatroom.append('<b>' + data.name + ': </b>' + data.msg + '<br/>');
 		});
+
+		socket.on('private_msg', function(data){
+			$chatroom.append('<span class = "private_msg"><b>' + data.name + ': </b>' + data.msg + '"</span><br/>');		
+		})
 	});
 	</script>
 </body>
