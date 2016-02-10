@@ -1,17 +1,16 @@
-<!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<title>Welcome to the Chatroom</title>
+	<link href="assets/css/bootstrap.css" rel="stylesheet" />
 	<style>	
-	#chatroom{
-		height: 600px;
-	}
 	#infowrapper{
 		display: none;
-	}
-	#messagewrapper{
-		float: left;
-		border: 2px solid black;
 	}
 	.error{
 		color: red;
@@ -23,32 +22,95 @@
 
 	</style>
 </head>
-<body>
-	<div id = "namewrapper">
-		<h5>Please enter a Name or Username</h5>
-		<p id = "Error"><p>
+
+<body style="font-family:Verdana">
+  <div class="container">
+<div class="row " style="padding-top:40px;">
+    <h2 class="text-center" >Welcome to the World's Greatest Chatroom! </h2>
+    <br><br/>
+    <div class="col-md-8">
+    	<div id ="namewrapper">
+				<p id = "Error"></p>
 			<form id = "setName">
-				<input size = "40" id = "name"></input>
-				<input type = "submit"></input>
-			</form>
-	</div>
-	<h6>Online Users</h6>
-	<div id = "users"></div>
-	<div id = "infowrapper">
-		<h5>Please Enter a message</h5>
-		<div id = "messagewrapper">
-			<div id ="chatroom"><div>
-			<form id = "messages">
-				<input size = "50" id = "message"></input>
-				<input type = "submit"></input>
+				<div class="input-group">
+	                <input type="text" class="form-control" id ="name" placeholder="Enter a Valid Username"/>
+	                <span class="input-group-btn">
+							<button class="btn btn-info" type="button">ENTER</button>
+	                </span>
+	            </div>
 			</form>
 		</div>
-		<!-- <div id = "users"></div> -->
+		<br></br>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                RECENT CHAT HISTORY
+            </div>
+		<div class="panel-body">
+			<ul class="media-list">
+		    <li class="media">
+		        <div class="media-body">
+		            <div class="media">
+		                <a class="pull-left" href="#"></a>
+		                <div class="media-body" >
+		                    <div id = "infowrapper">		
+							<div id = "messagewrapper">
+								<div id ="chatroom"></div>
+								<form id = "messages">
+								 <div class="panel-footer">
+									<div class="input-group">
+						                <input type="text" class="form-control" id ="message" placeholder="Enter Message"/>
+						                <span class="input-group-btn">
+												<button class="btn btn-info" type="button">ENTER</button>
+						                </span>
+						            </div>
+						        </div>
+								</form>
+							</div>		             
+		                </div>
+		            </div>
+		        </div>
+		    </li>
+		    </ul>
+		</div>
+	    </div>
 	</div>
 
-	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-	<script src="/socket.io/socket.io.js"></script>
+	<div class="col-md-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+               ONLINE USERS
+            </div>
+            <div class="panel-body">
+                <ul class="media-list">
 
+                    <li class="media">
+
+                        <div class="media-body">
+
+                            <div class="media">
+                                <a class="pull-left" href="#"></a>
+                                <div class="media-body" >
+                                    <div id = "users"></div>                             
+                                </div>
+                            </div>
+
+                        </div>
+                 	</li>
+                </ul>
+		     </div>
+		 </div>
+    	<blockquote>
+    		<dt>Chatroom Rules/Instructions</dt>
+    		<h5> No Hateful Messaging!</h5>
+    		<h5> To private message use <code>/msg "username"</code></h5>
+    		<h5> Have fun with messaging your friends!</h5>
+    		<footer> Admin </footer>
+    	</blockquote>
+	</div>
+
+</div> <!--div row-->
+	</div> <!--Container-->
+</body>
 	<!-- jquery code -->
 	<script>
 	$( document ).ready(function(){
