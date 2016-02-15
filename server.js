@@ -4,7 +4,8 @@ var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var names = {};
 
-server.listen(8000);
+var port =  Number(process.env.PORT || 8000)
+server.listen(port);
 console.log('listening on port 8000');
 
 
